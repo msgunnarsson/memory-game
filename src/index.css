@@ -1,0 +1,45 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  background: #191919;
+  color: #fff;
+}
+
+.game-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 150px;
+  margin-top: 2em;
+}
+
+h1 {
+  margin: 0;
+}
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 250px;
+  margin: 15px;
+  padding: 10px;
+  background: #ececec;
+}
+
+.card img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
