@@ -1,27 +1,31 @@
 import React from "react"
 import Card from "./Card"
-import Counter from "./Counter"
+
+const photos = [
+  "/images/bunny1.jpg",
+  "/images/bunny2.jpg",
+  "/images/bunny3.jpg",
+  "/images/bunny4.jpg",
+  "/images/bunny5.jpg"
+]
 
 class Game extends React.Component {
 
-  state = {
-    cards: [
-      {
-        src: "/images/bunny1.jpg"
-      },
-      {
-        src: "/images/bunny2.jpg"
-      },
-      {
-        src: "/images/bunny3.jpg"
-      },
-      {
-        src: "/images/bunny4.jpg"
-      },
-      {
-        src: "/images/bunny5.jpg"
-      }
-    ]
+  constructor(props) {
+    super(props)
+    this.state = {
+      cards: this.setupGame()
+    }
+  }
+
+  setupGame = () => {
+    const morePhotos = photos.concat(photos)
+
+    return morePhotos.map((url) => ({
+        src: url,
+        isFlipped: false
+      })
+    )
   }
 
   render() {
