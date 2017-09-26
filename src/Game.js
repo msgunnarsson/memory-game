@@ -1,10 +1,11 @@
 import React from "react"
 import Card from "./Card"
+import Counter from "./Counter"
 
 const Game = () => (
   <div>
     <header className="game-header">
-      <h1>Remember the Bunnies</h1>
+      <h1>Where is the Bunny?</h1>
     </header>
     <div className="card-container">
       <Card src="/images/bunny1.jpg" />
