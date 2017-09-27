@@ -1,6 +1,10 @@
 import React from "react"
 import Card from "./Card"
 
+//var shuffle = require('shuffle-array')
+import shuffle from "shuffle-array"
+
+
 const photos = [
   "/images/bunny1.jpg",
   "/images/bunny2.jpg",
@@ -22,13 +26,15 @@ class Game extends React.Component {
 
   setupGame = () => {
     //Duplicate the photos by adding the same photos to the array
-    const duplicatePhotos = photos.concat(photos)
+    const duplicatedPhotos = photos.concat(photos)
 
-    return duplicatePhotos.map((url) => ({
-        src: url,
-        isFlipped: false
-      })
-    )
+    //Take the duplicated photos and shuffle them with the imported shuffle function
+    const shuffledPhotos = shuffle(duplicatedPhotos)
+
+    return shuffledPhotos.map((url) => ({
+      src: url,
+      isFlipped: false
+    }))
   }
 
   render() {
