@@ -18,10 +18,13 @@ class Game extends React.Component {
     }
   }
 
-  setupGame = () => {
-    const morePhotos = photos.concat(photos)
 
-    return morePhotos.map((url) => ({
+
+  setupGame = () => {
+    //Duplicate the photos by adding the same photos to the array
+    const duplicatePhotos = photos.concat(photos)
+
+    return duplicatePhotos.map((url) => ({
         src: url,
         isFlipped: false
       })
