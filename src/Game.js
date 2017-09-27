@@ -22,8 +22,6 @@ class Game extends React.Component {
     }
   }
 
-
-
   setupGame = () => {
     //Duplicate the photos by adding the same photos to the array
     const duplicatedPhotos = photos.concat(photos)

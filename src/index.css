@@ -36,6 +36,7 @@ h1 {
   margin: 15px;
   padding: 10px;
   background: #ececec;
+  cursor: pointer;
 }
 
 .card img {
