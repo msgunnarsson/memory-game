@@ -1,5 +1,7 @@
 import React from "react"
 import Card from "./Card"
+import uuidv4 from "uuid/v4"
+
 
 //var shuffle = require('shuffle-array')
 import shuffle from "shuffle-array"
@@ -29,16 +31,16 @@ class Game extends React.Component {
     //Take the duplicated photos and shuffle them with the imported shuffle function
     const shuffledPhotos = shuffle(duplicatedPhotos)
 
-    return shuffledPhotos.map((url, index) => ({
-      id: index,
+    return shuffledPhotos.map((url) => ({
+      id: uuidv4(),
       src: url,
       isFlipped: false
     }))
   }
 
-  // New function wich will take one argument, a "card src"
-  handleCardClicked = (cardSrc) => {
-    alert ("you clicked " + cardSrc)
+  // New function wich will take one argument, a "card id"
+  handleCardClicked = (cardId) => {
+    alert ("you clicked " + cardId)
   }
 
   // onCardClick is a prop for Card
@@ -54,7 +56,7 @@ class Game extends React.Component {
 
         <div className="card-container">
           {this.state.cards.map((card) => (
-            <Card key={card.id} src={card.src} onCardClick={this.handleCardClicked} />
+            <Card key={card.id} cardId={card.id} src={card.src} onCardClick={this.handleCardClicked} />
           ))}
         </div>
       </div>
