@@ -29,10 +29,15 @@ class Game extends React.Component {
     //Take the duplicated photos and shuffle them with the imported shuffle function
     const shuffledPhotos = shuffle(duplicatedPhotos)
 
-    return shuffledPhotos.map((url) => ({
+    return shuffledPhotos.map((url, index) => ({
+      id: index,
       src: url,
       isFlipped: false
     }))
+  }
+
+  handleCardClicked = (cardSrc) => {
+    alert ("you clicked " + cardSrc)
   }
 
   render() {
@@ -45,7 +50,7 @@ class Game extends React.Component {
 
         <div className="card-container">
           {this.state.cards.map((card) => (
-            <Card src={card.src} />
+            <Card key={card.id} src={card.src} onCardClick={this.handleCardClicked} />
           ))}
         </div>
       </div>

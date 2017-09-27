@@ -7,7 +7,7 @@ class Card extends React.Component {
   // Because it's in a class, it has access to 'this'.
   // So it can use this.props.src
   handleClick = () => {
-    alert ("clicked on " + this.props.src)
+    this.props.onCardClick(this.props.src)
   }
 
   // render() is a required function for our component.
