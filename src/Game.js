@@ -36,10 +36,14 @@ class Game extends React.Component {
     }))
   }
 
+  // New function wich will take one argument, a "card src"
   handleCardClicked = (cardSrc) => {
     alert ("you clicked " + cardSrc)
   }
 
+  // onCardClick is a prop for Card
+  // We're passing a callback function, "onCardClick", to the Card and then running it in the Card component
+  // Wich the Card can invoke when clicked
   render() {
 
     return (
