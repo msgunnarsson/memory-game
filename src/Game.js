@@ -54,11 +54,32 @@ class Game extends React.Component {
       return card
     })
 
-    this.setState({
-      cards: newCardState
-    })
+    this.setState({ cards: newCardState}, this.checkIfCardsMatched )
   }
 
+  checkIfCardsMatched = () => {
+
+    const flippedCards = this.state.cards.filter((card) => {
+      if (card.isFlipped) {
+        return true
+      }
+    })
+
+
+    if (flippedCards.length === 2) {
+
+      const resetCards = this.state.cards.map((card) => {
+
+        if ( card.isFlipped ) {
+          card.isFlipped = false
+        }
+
+        return card
+      })
+
+      this.setState({ cards: resetCards} )
+    }
+  }
   // onCardClick is a prop for Card
   // We're passing a callback function, "onCardClick", to the Card and then running it in the Card component
   // Wich the Card can invoke when clicked
