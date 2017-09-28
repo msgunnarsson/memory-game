@@ -38,17 +38,24 @@ class Game extends React.Component {
     }))
   }
 
-  // New function wich will take one argument, a "card id"
-  handleCardClicked = (cardId) => {
-    const newStateArray = this.state.cards.map((card) => {
-      if ( card.id === cardId ) {
+  // This function will be called from the Card component because we have passed it as a prop (called whenClicked)
+  // when we render the Card component
+  //
+  // To generate the new state, we need to .ap over the old state, and, if the the cadr we're mapping over is the clicked card, we need ti set it's 'isFlipped' value to be 'true'. Otherwise we don't need to change the state for that card.
+  //
+  // Finally, we can use 'this.setState' with this new array we've built.
+  handleCardClicked = (clickedCardId) => {
+    const newCardState = this.state.cards.map((card) => {
+
+      if ( card.id === clickedCardId ) {
         card.isFlipped = true
       }
+
       return card
     })
 
     this.setState({
-      cards: newStateArray
+      cards: newCardState
     })
   }
 
