@@ -40,7 +40,16 @@ class Game extends React.Component {
 
   // New function wich will take one argument, a "card id"
   handleCardClicked = (cardId) => {
-    alert ("you clicked " + cardId)
+    const newStateArray = this.state.cards.map((card) => {
+      if ( card.id === cardId ) {
+        card.isFlipped = true
+      }
+      return card
+    })
+
+    this.setState({
+      cards: newStateArray
+    })
   }
 
   // onCardClick is a prop for Card
@@ -56,7 +65,12 @@ class Game extends React.Component {
 
         <div className="card-container">
           {this.state.cards.map((card) => (
-            <Card key={card.id} cardId={card.id} src={card.src} onCardClick={this.handleCardClicked} />
+            <Card
+              key={card.id}
+              cardId={card.id}
+              src={card.src}
+              onCardClick={this.handleCardClicked}
+              isFlipped={card.isFlipped} />
           ))}
         </div>
       </div>
