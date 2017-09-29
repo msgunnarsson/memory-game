@@ -25,6 +25,8 @@ body {
 
 h1 {
   margin: 0;
+  font-weight: normal;
+  font-size: 2.5rem;
 }
 
 .card-container {
@@ -42,6 +44,11 @@ h1 {
   padding: 10px;
   background: #ececec;
   cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+.card:hover {
+  transform: translateY(-5px);
 }
 
 .card img {
@@ -79,7 +86,7 @@ h1 {
   background: white;
   color: black;
   border-radius: 0;
-  height: 20px;
+  padding: 10px;
   border: none;
   cursor: pointer;
 }
