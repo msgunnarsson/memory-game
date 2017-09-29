@@ -1,5 +1,6 @@
 import React from "react"
 import Card from "./Card"
+import SuccessMessage from "./SuccessMessage"
 import uuidv4 from "uuid/v4"
 
 
@@ -20,7 +21,8 @@ class Game extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      cards: this.setupGame()
+      cards: this.setupGame(),
+      win: false
     }
   }
 
@@ -34,7 +36,8 @@ class Game extends React.Component {
     return shuffledPhotos.map((url) => ({
       id: uuidv4(),
       src: url,
-      isFlipped: false
+      isFlipped: false,
+      isMatched: false
     }))
   }
 
@@ -60,31 +63,55 @@ class Game extends React.Component {
   checkIfCardsMatched = () => {
 
     const flippedCards = this.state.cards.filter((card) => {
-      if (card.isFlipped) {
-        return true
-      }
+      // return card.isFlipped
+      return card.isFlipped && !card.isMatched
     })
 
 
     if (flippedCards.length === 2) {
 
-      const resetCards = this.state.cards.map((card) => {
+      //We have to match on the src because the ids are different even if its the same card
+      const isMatch = flippedCards[0].src === flippedCards[1].src
 
-        if ( card.isFlipped ) {
-          card.isFlipped = false
-        }
+      setTimeout(() => {
 
-        return card
-      })
+        const newCardState = this.state.cards.map((card) => {
+          //If the card we are looping over is one of the newly flipped cards
+          //set their status according to if they matched
+          // if(flippedCards.includes(card))
+          if(card.id === flippedCards[0].id || card.id === flippedCards[1].id) {
+            card.isFlipped = false; //If they matched, isFlipped should be true
+            card.isMatched = isMatch; //Same for this
+          }
+          //If its not a matched card, or a flipped over card, just return it as it normally was.
+          //(not flipped over or matched);
+          return card
+        })
 
-      this.setState({ cards: resetCards} )
+        this.setState({ cards: newCardState }, this.gameEnd)
+      }, 500)
+
     }
   }
+
+  gameEnd = () => {
+    const cardMatch = this.state.cards.filter((card) => {
+      return card.isMatched
+    })
+
+    if(cardMatch.length === this.state.cards.length) {
+      this.setState({ win: true })
+    }
+  }
+
+  resetGame = () => {
+    this.setState({ cards: this.setupGame(), win: false} )
+  }
+
   // onCardClick is a prop for Card
   // We're passing a callback function, "onCardClick", to the Card and then running it in the Card component
   // Wich the Card can invoke when clicked
   render() {
-
     return (
       <div>
         <header className="game-header">
@@ -94,13 +121,16 @@ class Game extends React.Component {
         <div className="card-container">
           {this.state.cards.map((card) => (
             <Card
-              key={card.id}
-              cardId={card.id}
-              src={card.src}
-              onCardClick={this.handleCardClicked}
-              isFlipped={card.isFlipped} />
+            key={card.id}
+            cardId={card.id}
+            src={card.src}
+            onCardClick={this.handleCardClicked}
+            isFlipped={card.isFlipped}
+            isMatched={card.isMatched} />
           ))}
+          {this.state.win && <SuccessMessage />}
         </div>
+        <button className="reset-btn" onClick={this.resetGame}>{this.state.win ? "New game" : "Reset game"}</button>
       </div>
     )
   }
