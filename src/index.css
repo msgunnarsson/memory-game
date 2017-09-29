@@ -83,3 +83,8 @@ h1 {
   border: none;
   cursor: pointer;
 }
+
+.flipped {
+  display: inline-block;
+  transform: rotateY(180deg);
+}
