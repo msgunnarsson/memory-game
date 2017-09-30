@@ -5,7 +5,7 @@ class SuccessMessage extends React.Component {
   render() {
     return(
       <div className="success-message">
-        <p><span className="flipped">🎉</span> Yaaaaay, you did it! <span>🎉</span></p>
+        <p><span className="flipped" role="img">🎉</span> Yaaaaay, you did it! <span role="img">🎉</span></p>
 
       </div>
     )
